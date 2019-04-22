@@ -3,20 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule, routableComponents} from './app-routing.module';
-import {NavBarComponent} from './components/nav-bar/nav-bar.component';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComputerService} from './services/computer.service';
 import {CompanyService} from './services/company.service';
-import {PaginationComponent} from './components/pagination/pagination.component';
+import {SharedModule} from './shared.module';
+import {ComputersModule} from './components/computer/computers.module';
 
 @NgModule({
   declarations: [
-    AppComponent, routableComponents, NavBarComponent, PaginationComponent
+    AppComponent, routableComponents
   ],
   imports: [
-    BrowserModule, FormsModule, ReactiveFormsModule, RouterModule, HttpClientModule, AppRoutingModule
+    BrowserModule, FormsModule, ReactiveFormsModule, RouterModule, HttpClientModule, SharedModule, AppRoutingModule
   ],
   providers: [CompanyService, ComputerService],
   bootstrap: [AppComponent]

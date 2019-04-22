@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Company} from '../../models/company';
-import {Pager} from '../../utils/Paginable';
 import {CompanyService} from '../../services/company.service';
+import {Pager} from '../../models/pager';
 
 @Component({
   templateUrl: './companies.component.html',
@@ -28,9 +28,20 @@ export class CompaniesComponent implements OnInit {
     });
   }
 
+  public removeCompany(id: number) {
+    this.isLoading = true;
+    this.companyService.deleteCompany(id).subscribe(() => {
+      this.companies = this.companies.filter((item: Company) => item.id !== id);
+      this.isLoading = false;
+    });
+  }
+
   public switchPagination(e: any) {
-    console.log('value : ', e);
-    if (e === 'next') {
+    if (e === 'first') {
+      this.getCompanies();
+    } else if (e === 'last') {
+      this.getCompanies(this.pager.totalPages - 1);
+    } else if (e === 'next') {
       this.getCompanies(this.pager.number + 1);
     } else if (e === 'previous') {
       this.getCompanies(this.pager.number - 1);

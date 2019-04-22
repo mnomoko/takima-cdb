@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Pager} from '../../utils/Paginable';
+import {Pager} from '../../models/pager';
 
 @Component({
   selector: 'app-pagination',
@@ -10,9 +10,11 @@ export class PaginationComponent implements OnInit {
   @Input() pager: Pager;
   @Output() clickPagination = new EventEmitter();
   pagination: number[];
+  current: number;
 
   ngOnInit(): void {
     this.pagination = this.getPaginationIndexes(this.pager);
+    this.current = this.pager.number + 1;
   }
 
   public getPaginationIndexes(pager: Pager): number[] {

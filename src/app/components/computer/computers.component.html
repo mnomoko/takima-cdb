@@ -1,5 +1,8 @@
 <div class="container mt-5">
   <div *ngIf="!isLoading">
+    <div  class="form-group">
+      <button class="btn btn-info" [routerLink]="['/new-computer']">Ajouter un computer</button>
+    </div>
     <table class="table table-striped table-bordered table-hover">
       <thead class="thead">
       <tr>
@@ -8,15 +11,20 @@
         <th scope="col">Manufacturer</th>
         <th scope="col">Released</th>
         <th scope="col">Discontinued</th>
+        <th scope="col">Actions</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let computer of computers" [routerLink]="['/computers', computer.id]">
+      <tr *ngFor="let computer of computers">
         <th scope="row">{{ computer.id }}</th>
         <td>{{ computer.name }}</td>
         <td>{{ computer?.company?.name}}</td>
         <td>{{ formatDate(computer?.introduced)  | date}} </td>
         <td>{{ formatDate(computer?.discontinued) | date }}</td>
+        <td>
+          <button class="fa fa-pencil-square-o" [routerLink]="['/computers', computer.id]"></button>
+          <button class="fa fa-trash" (click)="removeComputer(computer.id)"></button>
+        </td>
       </tr>
       </tbody>
     </table>

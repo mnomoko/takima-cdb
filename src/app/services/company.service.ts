@@ -31,7 +31,7 @@ export class CompanyService {
   }
 
   public putCompany(company: Company) {
-    return this.http.put(API_COMPANY, company).pipe(catchError(Utils.handleError));
+    return this.http.put(`${API_COMPANY}/${company.id}`, company).pipe(catchError(Utils.handleError));
   }
 
   public deleteCompany(id: number) {

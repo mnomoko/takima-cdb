@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Computer} from '../../models/computer';
 import {ComputerService} from '../../services/computer.service';
-import {Pager} from '../../utils/Paginable';
 import {Utils} from '../../utils/utils';
-import {Company} from '../../models/company';
+import {Pager} from '../../models/pager';
 
 @Component({
   templateUrl: './computers.component.html',
@@ -35,13 +34,24 @@ export class ComputersComponent implements OnInit {
   }
 
   public switchPagination(e: any) {
-    console.log('value : ', e);
-    if (e === 'next') {
+    if (e === 'first') {
+      this.getComputers();
+    } else if (e === 'last') {
+      this.getComputers(this.pager.totalPages - 1);
+    } else if (e === 'next') {
       this.getComputers(this.pager.number + 1);
     } else if (e === 'previous') {
       this.getComputers(this.pager.number - 1);
     } else {
       this.getComputers(e - 1);
     }
+  }
+
+  public removeComputer(id: number) {
+    this.isLoading = true;
+    this.computerService.deleteComputer(id).subscribe(() => {
+      this.computers = this.computers.filter((item: Computer) => item.id !== id);
+      this.isLoading = false;
+    });
   }
 }
