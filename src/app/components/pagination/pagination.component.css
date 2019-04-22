@@ -1,0 +1,8 @@
+.navbar-brand > img {
+  max-height: 64px;
+}
+
+.disabled {
+  pointer-events: none;
+  /* display: none; # use this if you want to hide element */
+}

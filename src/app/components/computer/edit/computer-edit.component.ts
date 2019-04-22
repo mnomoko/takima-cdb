@@ -4,6 +4,8 @@ import {Computer} from '../../../models/computer';
 import {ComputerService} from '../../../services/computer.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Utils} from '../../../utils/utils';
+import {CompanyService} from '../../../services/company.service';
+import {Company} from '../../../models/company';
 
 @Component({
   templateUrl: './computer-edit.component.html',
@@ -11,6 +13,7 @@ import {Utils} from '../../../utils/utils';
 })
 export class ComputerEditComponent implements OnInit {
   computer: Computer;
+  companies: Company[];
   isLoading: boolean;
 
   computerForm = new FormGroup({
@@ -19,12 +22,11 @@ export class ComputerEditComponent implements OnInit {
     introduced: new FormControl(null),
     discontinued: new FormControl(null),
     company: new FormGroup({
-      id: new FormControl(null),
-      name: new FormControl(null)
+      id: new FormControl(null)
     })
   });
 
-  constructor(private router: Router, private route: ActivatedRoute, private computerService: ComputerService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService, private computerService: ComputerService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -38,13 +40,21 @@ export class ComputerEditComponent implements OnInit {
     this.computerService.getComputerById(id).subscribe((computer: Computer) => {
       this.computer = computer;
       this.setComputerForm(computer);
+      this.getCompanies();
+    });
+  }
+
+  private getCompanies() {
+    this.isLoading = true;
+    this.companyService.getCompaniesWithoutPagination().subscribe((response: any) => {
+      this.companies = response._embedded.companies;
       this.isLoading = false;
+      console.log('companies : ', this.companies);
     });
   }
 
   private setComputerForm(computer: Computer) {
     const companyId: number = (computer.company && computer.company.id) ? computer.company.id : undefined;
-    const companyName: string = (computer.company && computer.company.name) ? computer.company.name : undefined;
 
     this.computerForm.patchValue({
       id: computer.id,
@@ -52,14 +62,13 @@ export class ComputerEditComponent implements OnInit {
       introduced: Utils.fromJsonDate(computer.introduced),
       discontinued: Utils.fromJsonDate(computer.discontinued),
       company: {
-        id: companyId,
-        name: companyName
+        id: companyId
       }
     });
   }
 
   public saveComputer() {
-    const validateCompany = (company) => company.id ? company : undefined;
+    const validateCompany = (company) => this.companies.find(c => company && company.id && Number(company.id) === c.id);
     const computer: Computer = this.computerForm.value;
     computer.company = validateCompany(computer.company);
     this.computerService.putComputer(computer).subscribe(() => {

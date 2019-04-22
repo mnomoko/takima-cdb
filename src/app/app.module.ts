@@ -9,10 +9,11 @@ import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComputerService} from './services/computer.service';
 import {CompanyService} from './services/company.service';
+import {PaginationComponent} from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
-    AppComponent, routableComponents, NavBarComponent
+    AppComponent, routableComponents, NavBarComponent, PaginationComponent
   ],
   imports: [
     BrowserModule, FormsModule, ReactiveFormsModule, RouterModule, HttpClientModule, AppRoutingModule

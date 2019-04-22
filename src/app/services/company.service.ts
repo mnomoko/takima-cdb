@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {Company} from '../models/company';
 import {catchError} from 'rxjs/operators';
 import {Utils} from '../utils/utils';
@@ -10,9 +10,16 @@ import {Utils} from '../utils/utils';
 export class CompanyService {
   constructor(private http: HttpClient) {}
 
-  public getCompanies(): Observable<Company[]> {
+  public getCompanies(page?: number): Observable<Company[]> {
+    const url = page ? `${API_COMPANY}?page=${page}` : API_COMPANY;
     return this.http
-      .get<Company[]>(API_COMPANY);
+      .get<Company[]>(url);
+  }
+
+  public getCompaniesWithoutPagination(): Observable<Company[]> {
+    const url = `${API_COMPANY}?size=1000000000`;
+    return this.http
+      .get<Company[]>(url);
   }
 
   public getCompanyById(id: number): Observable<Company> {

@@ -9,9 +9,10 @@ import {Utils} from '../utils/utils';
 export class ComputerService {
   constructor(private http: HttpClient) {}
 
-  public getComputers(): Observable<Computer[]> {
+  public getComputers(page?: number): Observable<Computer[]> {
+    const url = page ? `${API_COMPUTERS}?page=${page}` : API_COMPUTERS;
     return this.http
-      .get<Computer[]>(API_COMPUTERS);
+      .get<Computer[]>(url);
   }
 
   public getComputerById(id: number): Observable<Computer> {
