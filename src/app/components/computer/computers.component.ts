@@ -25,7 +25,6 @@ export class ComputersComponent implements OnInit {
       this.computers = response._embedded.computers;
       this.pager = response.page;
       this.isLoading = false;
-      console.log('computers : ', this.computers);
     });
   }
 

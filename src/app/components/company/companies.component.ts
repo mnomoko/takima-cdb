@@ -24,7 +24,6 @@ export class CompaniesComponent implements OnInit {
       this.companies = response._embedded.companies;
       this.pager = response.page;
       this.isLoading = false;
-      console.log('companies : ', this.companies);
     });
   }
 

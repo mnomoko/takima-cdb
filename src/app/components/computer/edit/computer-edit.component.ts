@@ -35,7 +35,6 @@ export class ComputerEditComponent implements OnInit {
     this.companyService.getCompaniesWithoutPagination().subscribe((response: any) => {
       this.companies = response._embedded.companies;
       this.isLoading = false;
-      console.log('companies : ', this.companies);
     });
   }
 
@@ -44,7 +43,6 @@ export class ComputerEditComponent implements OnInit {
     // const computer: Computer = this.computerForm.value;
     computer.company = validateCompany(computer.company);
     this.computerService.putComputer(computer).subscribe(() => {
-      console.log('value : ', computer);
       this.gotoComputers();
     });
   }

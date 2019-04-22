@@ -30,7 +30,6 @@ export class CompanyEditComponent implements OnInit {
 
   public saveComputer(company: Company) {
     this.companyService.putCompany(company).subscribe(() => {
-      console.log('value : ', company);
       this.gotoCompanies();
     });
   }
