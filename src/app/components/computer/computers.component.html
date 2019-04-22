@@ -22,8 +22,8 @@
         <td>{{ formatDate(computer?.introduced)  | date}} </td>
         <td>{{ formatDate(computer?.discontinued) | date }}</td>
         <td>
-          <button class="fa fa-pencil-square-o" [routerLink]="['/computers', computer.id]"></button>
-          <button class="fa fa-trash" (click)="removeComputer(computer.id)"></button>
+          <button class="btn btn-secondary mr-2 fa fa-pencil-square-o" [routerLink]="['/computers', computer.id]"></button>
+          <button class="btn btn-secondary fa fa-trash" (click)="removeComputer(computer.id)"></button>
         </td>
       </tr>
       </tbody>
