@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <app-company-edition-commun *ngIf="!isLoading" [company]="company" (item)="saveComputer($event)"></app-company-edition-commun>
+  <app-company-edition-commun *ngIf="!isLoading" [company]="company" (item)="saveCompany($event)"></app-company-edition-commun>
   <div *ngIf="isLoading">
     <div class="loader"></div>
   </div>

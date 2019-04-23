@@ -9,9 +9,9 @@ import {Company} from '../../../models/company';
 })
 export class CompanyAddComponent {
 
-  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService) {}
+  constructor(public router: Router, private route: ActivatedRoute, private companyService: CompanyService) {}
 
-  public saveComputer(company: Company) {
+  public saveCompany(company: Company) {
     this.companyService.postCompany(company).subscribe(() => {
       this.gotoCompanies();
     });

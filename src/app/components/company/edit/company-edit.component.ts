@@ -11,7 +11,7 @@ export class CompanyEditComponent implements OnInit {
   company: Company;
   isLoading: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService) {}
+  constructor(public router: Router, private route: ActivatedRoute, private companyService: CompanyService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
