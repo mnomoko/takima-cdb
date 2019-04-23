@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Company} from '../../models/company';
 import {CompanyService} from '../../services/company.service';
 import {Pager} from '../../models/pager';
+import {finalize} from 'rxjs/operators';
+import {Utils} from '../../utils/utils';
+import Path = Utils.Path;
 
 @Component({
   templateUrl: './companies.component.html',
@@ -10,6 +13,9 @@ import {Pager} from '../../models/pager';
 export class CompaniesComponent implements OnInit {
   constructor(private companyService: CompanyService) {}
 
+  path: Path = new Utils.Path();
+
+  error: any;
   companies: Company[];
   pager: Pager;
   isLoading: boolean;
@@ -20,19 +26,22 @@ export class CompaniesComponent implements OnInit {
 
   private getCompanies(page?: number) {
     this.isLoading = true;
-    this.companyService.getCompanies(page).subscribe((response: any) => {
+    this.companyService.getCompanies(page)
+      .pipe(finalize(() => {
+        this.isLoading = false;
+      }))
+      .subscribe((response: any) => {
       this.companies = response._embedded.companies;
       this.pager = response.page;
-      this.isLoading = false;
-    });
+    }, error => console.error(error));
   }
 
   public removeCompany(id: number) {
+    this.error = undefined;
     this.isLoading = true;
     this.companyService.deleteCompany(id).subscribe(() => {
       this.companies = this.companies.filter((item: Company) => item.id !== id);
-      this.isLoading = false;
-    });
+    }, error => this.error = error, () => this.isLoading = false);
   }
 
   public switchPagination(e: any) {

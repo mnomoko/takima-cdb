@@ -3,6 +3,8 @@ import {Computer} from '../../models/computer';
 import {ComputerService} from '../../services/computer.service';
 import {Utils} from '../../utils/utils';
 import {Pager} from '../../models/pager';
+import {finalize} from 'rxjs/operators';
+import Path = Utils.Path;
 
 @Component({
   templateUrl: './computers.component.html',
@@ -10,6 +12,8 @@ import {Pager} from '../../models/pager';
 })
 export class ComputersComponent implements OnInit {
   constructor(private computerService: ComputerService) {}
+
+  path: Path = new Utils.Path();
 
   computers: Computer[];
   pager: Pager;
@@ -21,11 +25,14 @@ export class ComputersComponent implements OnInit {
 
   private getComputers(page?: number) {
     this.isLoading = true;
-    this.computerService.getComputers(page).subscribe((response: any) => {
+    this.computerService.getComputers(page)
+      .pipe(finalize(() => {
+        this.isLoading = false;
+      }))
+      .subscribe((response: any) => {
       this.computers = response._embedded.computers;
       this.pager = response.page;
-      this.isLoading = false;
-    });
+    }, error => console.error(error));
   }
 
   public formatDate(date) {
@@ -50,7 +57,6 @@ export class ComputersComponent implements OnInit {
     this.isLoading = true;
     this.computerService.deleteComputer(id).subscribe(() => {
       this.computers = this.computers.filter((item: Computer) => item.id !== id);
-      this.isLoading = false;
-    });
+    }, error => console.error(error), () => this.isLoading = false);
   }
 }

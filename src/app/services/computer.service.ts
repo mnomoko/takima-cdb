@@ -11,12 +11,11 @@ export class ComputerService {
 
   public getComputers(page?: number): Observable<Computer[]> {
     const url = page ? `${API_COMPUTERS}?page=${page}` : API_COMPUTERS;
-    return this.http
-      .get<Computer[]>(url);
+    return this.http.get<Computer[]>(url).pipe(catchError(Utils.handleError));
   }
 
   public getComputerById(id: number): Observable<Computer> {
-    return this.http.get<Computer>(`${API_COMPUTERS}/${id}`);
+    return this.http.get<Computer>(`${API_COMPUTERS}/${id}`).pipe(catchError(Utils.handleError));
   }
 
   public postComputer(computer: Computer) {

@@ -23,5 +23,12 @@ export namespace Utils {
     return throwError(
       'Something bad happened; please try again later.');
   }
+
+  export class Path {
+    companies = '/companies';
+    newCompany = '/new-company';
+    computers = '/computers';
+    newComputer = '/new-computer';
+  }
 }
 

@@ -13,17 +13,17 @@ export class CompanyService {
   public getCompanies(page?: number): Observable<Company[]> {
     const url = page ? `${API_COMPANY}?page=${page}` : API_COMPANY;
     return this.http
-      .get<Company[]>(url);
+      .get<Company[]>(url).pipe(catchError(Utils.handleError));
   }
 
   public getCompaniesWithoutPagination(): Observable<Company[]> {
     const url = `${API_COMPANY}?size=1000000000`;
     return this.http
-      .get<Company[]>(url);
+      .get<Company[]>(url).pipe(catchError(Utils.handleError));
   }
 
   public getCompanyById(id: number): Observable<Company> {
-    return this.http.get<Company>(`${API_COMPANY}/${id}`);
+    return this.http.get<Company>(`${API_COMPANY}/${id}`).pipe(catchError(Utils.handleError));
   }
 
   public postCompany(company: Company) {

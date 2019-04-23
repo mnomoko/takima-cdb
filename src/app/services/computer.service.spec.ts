@@ -42,7 +42,7 @@ describe('ComputerService', () => {
           const requestWrapper = backend.expectOne({url: API_COMPANY});
           requestWrapper.flush(responseObject);
 
-          expect(requestWrapper.request.method).toEqual('GET');
+          expect(requestWrapper.request.method).toEqual(`GET`);
           expect(response).toEqual(responseObject);
         }
       )
@@ -68,7 +68,7 @@ describe('ComputerService', () => {
           const requestWrapper = backend.expectOne({url: API_COMPANY_ID_1});
           requestWrapper.flush(responseObject);
 
-          expect(requestWrapper.request.method).toEqual('GET');
+          expect(requestWrapper.request.method).toEqual(`GET`);
           expect(response).toEqual(responseObject);
         }
       )
@@ -94,7 +94,7 @@ describe('ComputerService', () => {
           const requestWrapper = backend.expectOne({url: API_COMPANY_ID_1});
           requestWrapper.flush(responseObject);
 
-          expect(requestWrapper.request.method).toEqual('PUT');
+          expect(requestWrapper.request.method).toEqual(`PUT`);
           expect(response).toEqual(responseObject);
         }
       )
@@ -119,7 +119,7 @@ describe('ComputerService', () => {
           const requestWrapper = backend.expectOne({url: API_COMPANY_ID_1});
           requestWrapper.flush({});
 
-          expect(requestWrapper.request.method).toEqual('DELETE');
+          expect(requestWrapper.request.method).toEqual(`DELETE`);
         }
       )
     )

@@ -10,7 +10,6 @@ import {Company} from '../../../models/company';
 export class CompanyCommunComponent implements OnInit {
   @Input() company: Company;
   @Output() item = new EventEmitter();
-  isLoading: boolean;
   title: string;
 
   companyForm = new FormGroup({
@@ -21,7 +20,6 @@ export class CompanyCommunComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.isLoading = true;
     if (this.company) {
       this.setCompanyForm(this.company);
       this.title = this.company.name;
