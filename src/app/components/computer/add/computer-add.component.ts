@@ -14,14 +14,14 @@ export class ComputerAddComponent implements OnInit {
   companies: Company[];
   isLoading: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService, private computerService: ComputerService) {}
+  constructor(public router: Router, private route: ActivatedRoute, private companyService: CompanyService, private computerService: ComputerService) {}
 
   ngOnInit(): void {
     this.getCompanies();
   }
 
   private getCompanies() {
-    // this.isLoading = true;
+    this.isLoading = true;
     this.companyService.getCompaniesWithoutPagination().subscribe((response: any) => {
       this.companies = response._embedded.companies;
       this.isLoading = false;

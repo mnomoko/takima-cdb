@@ -9,7 +9,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComputerService} from './services/computer.service';
 import {CompanyService} from './services/company.service';
 import {SharedModule} from './shared.module';
-import {ComputersModule} from './components/computer/computers.module';
 
 @NgModule({
   declarations: [

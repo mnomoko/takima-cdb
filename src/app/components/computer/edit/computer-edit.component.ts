@@ -14,7 +14,7 @@ export class ComputerEditComponent implements OnInit {
   companies: Company[];
   isLoading: boolean;
 
-  constructor(private router: Router, private route: ActivatedRoute, private companyService: CompanyService, private computerService: ComputerService) {}
+  constructor(public router: Router, private route: ActivatedRoute, private companyService: CompanyService, private computerService: ComputerService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
