@@ -9,13 +9,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ComputerService} from './services/computer.service';
 import {CompanyService} from './services/company.service';
 import {SharedModule} from './shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent, routableComponents
   ],
   imports: [
-    BrowserModule, FormsModule, ReactiveFormsModule, RouterModule, HttpClientModule, SharedModule, AppRoutingModule
+    BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, RouterModule, HttpClientModule, SharedModule, AppRoutingModule
   ],
   providers: [CompanyService, ComputerService],
   bootstrap: [AppComponent]

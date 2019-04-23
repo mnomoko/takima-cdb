@@ -15,9 +15,11 @@ export namespace Utils {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+      console.error(`Backend returned code ${error.status}, body was: ${error.error}`, error);
+
+      if (error.status === 409) {
+        return throwError(error.error.cause.message);
+      }
     }
     // return an observable with a user-facing error message
     return throwError(

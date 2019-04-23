@@ -7,11 +7,12 @@ import {ComputerCommunComponent} from './components/computer/commun/computer-com
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {ErrorAlertComponent} from './components/error-alert/error-alert.component';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, RouterModule, ReactiveFormsModule ],
-  declarations: [ NavBarComponent, PaginationComponent, ComputerCommunComponent, CompanyCommunComponent ],
-  exports: [ NavBarComponent, PaginationComponent, ComputerCommunComponent, CompanyCommunComponent ]
+  declarations: [ NavBarComponent, PaginationComponent, ErrorAlertComponent, ComputerCommunComponent, CompanyCommunComponent ],
+  exports: [ NavBarComponent, PaginationComponent, ErrorAlertComponent, ComputerCommunComponent, CompanyCommunComponent ]
 })
 
 export class SharedModule {}

@@ -1,7 +1,5 @@
 <div class="container mt-5">
-  <div *ngIf="error" class="alert alert-danger" role="alert">
-    {{ error }}
-  </div>
+  <app-error-alert *ngIf="error" [error]="error"></app-error-alert>
   <div *ngIf="!isLoading">
     <div  class="form-group">
       <button class="btn btn-info" [routerLink]="[path.newCompany]">Ajouter une company</button>

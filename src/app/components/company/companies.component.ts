@@ -41,7 +41,11 @@ export class CompaniesComponent implements OnInit {
     this.isLoading = true;
     this.companyService.deleteCompany(id).subscribe(() => {
       this.companies = this.companies.filter((item: Company) => item.id !== id);
-    }, error => this.error = error, () => this.isLoading = false);
+      this.isLoading = false;
+    }, error => {
+      this.error = error;
+      this.isLoading = false;
+    });
   }
 
   public switchPagination(e: any) {
