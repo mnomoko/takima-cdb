@@ -2,8 +2,6 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {PageNotFoundComponent} from './page-not-found.component';
 import {CompaniesComponent} from './components/company/companies.component';
-import {ComputersComponent} from './components/computer/computers.component';
-import {ComputerEditComponent} from './components/computer/edit/computer-edit.component';
 import {ComputerAddComponent} from './components/computer/add/computer-add.component';
 import {CompanyEditComponent} from './components/company/edit/company-edit.component';
 import {CompanyAddComponent} from './components/company/add/company-add.component';

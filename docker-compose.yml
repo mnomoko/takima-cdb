@@ -1,0 +1,7 @@
+version: '2.3'
+
+services:
+  cdb-front:
+    build: .
+    ports:
+      - "8083:80"

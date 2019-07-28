@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Company} from '../models/company';
 import {catchError} from 'rxjs/operators';
 import {Utils} from '../utils/utils';
+import {environment} from '../../environments/environment';
 
 
 @Injectable()
@@ -39,4 +40,5 @@ export class CompanyService {
   }
 }
 
-const API_COMPANY = 'http://localhost:8080/api/companies';
+// const API_COMPANY = 'http://localhost:8080/api/companies';
+const API_COMPANY = `${environment.apiUrl}/companies`;

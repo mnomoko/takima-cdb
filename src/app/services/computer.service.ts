@@ -4,6 +4,7 @@ import {Computer} from '../models/computer';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Utils} from '../utils/utils';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ComputerService {
@@ -32,4 +33,5 @@ export class ComputerService {
 
 }
 
-const API_COMPUTERS  = 'http://localhost:8080/api/computers';
+// const API_COMPUTERS  = 'http://localhost:8080/api/computers';
+const API_COMPUTERS = `${environment.apiUrl}/computers`;
