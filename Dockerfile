@@ -1,11 +1,13 @@
 # The builder from node image
 FROM node:12.2.0-alpine as builder
 
-RUN apk update && apk add --no-cache make git
+#RUN apk update && apk add --no-cache make git
+RUN apk --no-cache add python make g++
 
 # Move our files into directory name "app"
 WORKDIR /app
-COPY package.json package-lock.json  /app/
+#COPY package.json package-lock.json  /app/
+COPY package.json  /app/
 RUN npm install @angular/cli@8.0.1 -g
 RUN cd /app && npm install
 COPY .  /app/
